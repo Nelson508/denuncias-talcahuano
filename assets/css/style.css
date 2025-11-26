@@ -1,0 +1,770 @@
+/* ---------- RESET SIMPLE ---------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f6f6f6;
+    color: #222;
+}
+
+/* ---------- LAYOUT GENERAL ---------- */
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- SIDEBAR IZQUIERDA ---------- */
+.sidebar {
+    width: 48%;
+    position: relative;
+    color: #fff;
+    padding: 20px 70px 10px 70px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sidebar-inner {
+    max-width: 500px;   /* ancho de columna de texto */
+    margin-left: 60px;  /* espacio desde el borde izquierdo */
+}
+
+
+/* Fondo: usa tu propia imagen en assets/img/fondo.jpg */
+.sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/fondo.jpg") center/cover no-repeat;
+    z-index: -2;
+}
+
+.sidebar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(48, 75, 155, 0.70); /* azul con transparencia */
+    z-index: -1;
+}
+
+
+.sidebar-logo {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.sidebar-logo img {
+    width: 240px;     /* tamaño más parecido al mockup */
+    height: auto;
+}
+
+.sidebar-text {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+.sidebar ul {
+    margin-left: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.sidebar-footer {
+    margin-top: 20px;
+    text-align: end;
+}
+
+.btn-seguimiento {
+    display: inline-block;
+    background: #e73333;
+    color: #fff;
+    padding: 14px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ---------- COLUMNA DERECHA (FORMULARIO) ---------- */
+.main {
+    width: 55%;
+    background: #ffffff;
+    padding: 50px 70px;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.08);
+}
+
+.form-title {
+    font-size: 34px;
+    margin-bottom: 35px;
+}
+
+/* ---------- STEPPER (1-4) ---------- */
+.stepper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 40px;
+    font-size: 13px;
+}
+
+.stepper-line {
+    flex: 1;
+    height: 2px;
+    background: #dcdcdc;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 80px;
+}
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    background: #fff;
+    color: #555;
+}
+
+.step-label {
+    text-align: center;
+    color: #777;
+    line-height: 1.3;
+}
+
+/* estado activo */
+.step-active .step-circle {
+    background: #39c15b;
+    border-color: #39c15b;
+    color: white;
+}
+
+.step-active .step-label {
+    color: #39c15b;
+    font-weight: bold;
+}
+
+
+/* ---------- FORMULARIO ---------- */
+.form-section-title {
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 6px;
+    border: 1px solid #e1e1e1;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ---------- RADIO LISTA (PASO 2) ---------- */
+.radio-list {
+    margin-top: 10px;
+}
+.radio-item {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.radio-item input {
+    margin-right: 8px;
+}
+
+/* ---------- BOTONES ---------- */
+/* ---------- BOTONES ---------- */
+
+/* Contenedor de botones (se usa en todos los pasos) */
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;              /* espacio entre botones */
+    margin-top: 40px;
+}
+
+/* Estilo base de cualquier botón (a o button) */
+.btn {
+    display: flex;          /* necesario para centrar texto */
+    align-items: center;
+    justify-content: center;
+    width: 260px;           /* ancho igual que mockup */
+    height: 50px;           /* altura igual que mockup */
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;  /* para <a> */
+    border: none;
+}
+
+/* Botón rojo */
+.btn-red {
+    background: #e73333;
+    color: white;
+}
+
+/* Botón volver con borde (si lo quieres diferente más adelante) */
+.btn-outline {
+    background: white;
+    border: 2px solid #e73333;
+    color: #e73333;
+}
+
+
+/* ---------- RESPONSIVE RÁPIDO ---------- */
+@media (max-width: 1024px) {
+    .page-wrapper {
+        flex-direction: column;
+    }
+    .sidebar, .main {
+        width: 100%;
+    }
+    .main {
+        box-shadow: none;
+    }
+}
+
+.logo-img {
+    width: 312px;     /* tamaño ideal según tu mockup */
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* ================== SEGUIMIENTO DE DENUNCIAS ================== */
+
+.tracking-body {
+    background: #f5f6fb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.tracking-container {
+    width: 100%;
+    max-width: 1600px;   /* puedes subirlo a 1800 o quitarlo */
+    margin: 40px auto;
+    padding: 0 50px 40px;
+}
+
+
+.tracking-title {
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+/* FILTROS */
+
+.tracking-filters {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.filter-group select,
+.filter-group input[type="date"] {
+    width: 100%;
+    padding: 11px 10px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    background: #fafafa;
+}
+
+.filter-button {
+    display: flex;
+    align-items: flex-end;
+}
+
+.btn-blue {
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 4px;
+    border: none;
+    background: #0050a8;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: .5px;
+    cursor: pointer;
+}
+
+/* LAYOUT PRINCIPAL */
+
+.tracking-main {
+    display: grid;
+    grid-template-columns: 2.1fr 1fr;  /* tabla + lado derecho */
+    gap: 32px;
+}
+
+/* TABLA */
+
+.tracking-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tracking-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.tracking-table thead {
+    background: #0050a8;
+    color: #fff;
+}
+
+.tracking-table th,
+.tracking-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e4e4e4;
+    text-align: left;
+}
+
+.tracking-table tbody tr:nth-child(even) {
+    background: #f7f9ff;
+}
+
+/* ESTADOS */
+
+.status-pill {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    box-sizing: border-box;
+}
+
+
+.status-created {
+    background: #46c45c;
+}
+
+.status-review {
+    background: #f2b632;
+}
+
+.status-closed {
+    background: #e84545;
+}
+
+/* BOTONES BITACORA / VER */
+
+.btn-pill {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #0050a8;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* LADO DERECHO */
+
+.tracking-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.side-block h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.side-box {
+    background: #f2f5ff;
+    border-radius: 4px;
+    border: 1px dashed #c5d3f5;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #777;
+}
+
+/* RESPONSIVE SIMPLE */
+
+@media (max-width: 1024px) {
+    .tracking-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+    .tracking-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+.side-map {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.bitacora-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.bitacora-card {
+    background: #ffffff;
+    padding: 18px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.bitacora-card h3 {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #0050a8;
+}
+
+.bitacora-img-placeholder {
+    background: #f2f5ff;
+    border-radius: 8px;
+    border: 1px dashed #c5d3f5;
+    height: 160px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+}
+
+@media (max-width: 900px) {
+    .bitacora-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.autocomplete {
+    position: relative;
+}
+
+.autocomplete-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    font-size: 14px;
+}
+
+.autocomplete-list li {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+    background: #f2f5ff;
+}
+
+.bitacora-page .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.bitacora-page .btn-blue {
+    background: #0054b8;
+    color: #fff;
+}
+
+.bitacora-page .btn-outline-blue {
+    background: #fff;
+    color: #0054b8;
+    border: 2px solid #0054b8;
+}
+
+.bitacora-page .bitacora-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   ESTILOS ESPECÍFICOS BITÁCORA
+   ================================ */
+
+.bitacora-page .bitacora-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.bitacora-page .bitacora-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #225a8f; /* similar al mockup */
+}
+
+.bitacora-page .bitacora-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Botones "pill" SOLO para bitácora */
+.bitacora-page .bit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 110px;        /* ancho razonable, no gigantes */
+}
+
+/* Botón PDF */
+.bitacora-page .bit-btn-primary {
+    background: #0b63d1;
+    color: #ffffff;
+}
+
+/* Botón Cambiar estado */
+.bitacora-page .bit-btn-outline {
+    background: #ffffff;
+    color: #0b63d1;
+    border: 2px solid #0b63d1;
+}
+
+/* Por si el contenedor padre tenía fondos raros (como en tu captura) */
+.bitacora-page .bitacora-header-row {
+    background: transparent;
+}
+
+
+
+/* ================================
+   ESTILOS ESPECÍFICOS MODAL
+   ================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-estado {
+    background: #fff;
+    width: 600px;
+    max-width: 90%;
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.modal-close {
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-body .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.modal-body label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.modal-body select,
+.modal-body textarea,
+.modal-body input[type="text"] {
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+.modal-extra-inputs {
+    flex-direction: row;
+    gap: 8px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.btn-red {
+    background: #e73333;
+    color: #fff;
+}
+
+.btn-yellow {
+    background: #f4b000;
+    color: #fff;
+}
+
+.bitacora-map-card {
+    background: #ffffff;
+    padding: 12px 14px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    margin-bottom: 18px;
+}
+
+.bitacora-map-card h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #0050a8;
+}
+
+.bitacora-map {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+
+/* Pastilla base */
+.estado-pill {
+    display: block;
+    width: 100%;          /* ocupa todo el espacio de la columna */
+    text-align: center;
+    padding: 6px 0;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Colores por estado */
+.estado-creado {
+    background: #28a745;      /* verde */
+}
+
+.estado-revision {
+    background: #f4b000;      /* amarillo */
+}
+
+.estado-cerrado {
+    background: #e73333;      /* rojo */
+}
+
+.panel-chart-wrapper {
+    height: 220px;
+}
+
+#chartEstados {
+    width: 100%;
+    height: 100%;
+}
+
