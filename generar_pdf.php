@@ -8,6 +8,12 @@ if (!isset($_GET['id'])) {
     die("ID de denuncia no especificado.");
 }
 
+function texto_pdf($s) {
+    // Convierte de UTF-8 a ISO-8859-1 que es lo que entiende FPDF por defecto
+    // TRANSLIT intenta aproximar caracteres que no existen en ISO
+    return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $s);
+}
+
 $idBuscado = (int) $_GET['id'];
 
 $archivo = __DIR__ . '/data/denuncias.json';
@@ -53,13 +59,13 @@ class PDFDenuncia extends FPDF
         // Texto arriba izquierda: "FORMULARIO DE DENUNCIA"
         $this->SetFont('Arial', '', 9);
         $this->SetTextColor(80, 80, 80);
-        $this->Cell(0, 4, utf8_decode('FORMULARIO DE DENUNCIA'), 0, 1, 'L');
+        $this->Cell(0, 4, texto_pdf('FORMULARIO DE DENUNCIA'), 0, 1, 'L');
 
         // Título principal centrado
         $this->Ln(2);
         $this->SetFont('Arial', 'B', 15);
         $this->SetTextColor(0, 0, 0);
-        $this->Cell(0, 8, utf8_decode('COMPROBANTE DE DENUNCIA DIGITAL'), 0, 1, 'C');
+        $this->Cell(0, 8, texto_pdf('COMPROBANTE DE DENUNCIA DIGITAL'), 0, 1, 'C');
 
         // Logo en la esquina superior derecha
         if ($this->logoPath && file_exists($this->logoPath)) {
@@ -81,7 +87,7 @@ class PDFDenuncia extends FPDF
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
         $this->SetTextColor(150, 150, 150);
-        $this->Cell(0, 10, utf8_decode('Comprobante generado digitalmente - Municipalidad de Talcahuano'), 0, 0, 'C');
+        $this->Cell(0, 10, texto_pdf('Comprobante generado digitalmente - Municipalidad de Talcahuano'), 0, 0, 'C');
     }
 }
 
@@ -102,7 +108,7 @@ function tituloSeccion($pdf, $texto)
     $pdf->SetFont('Arial', 'B', 11);
     $pdf->SetTextColor(40, 40, 40);
     $pdf->Ln(3);
-    $pdf->Cell(0, 6, utf8_decode($texto), 0, 1, 'L');
+    $pdf->Cell(0, 6, texto_pdf($texto), 0, 1, 'L');
 
     // Línea debajo del título
     $pdf->SetDrawColor(0, 102, 204); // azul suave
@@ -123,20 +129,20 @@ function campoDoble($pdf, $etqIzq, $valIzq, $etqDer = '', $valDer = '')
 {
     $pdf->SetFont('Arial', 'B', 9);
     $pdf->SetTextColor(60, 60, 60);
-    $pdf->Cell(40, 5, utf8_decode($etqIzq), 0, 0, 'L');
+    $pdf->Cell(40, 5, texto_pdf($etqIzq), 0, 0, 'L');
 
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(0, 0, 0);
-    $pdf->Cell(50, 5, utf8_decode($valIzq), 0, 0, 'L');
+    $pdf->Cell(50, 5, texto_pdf($valIzq), 0, 0, 'L');
 
     if ($etqDer !== '') {
         $pdf->SetFont('Arial', 'B', 9);
         $pdf->SetTextColor(60, 60, 60);
-        $pdf->Cell(30, 5, utf8_decode($etqDer), 0, 0, 'L');
+        $pdf->Cell(30, 5, texto_pdf($etqDer), 0, 0, 'L');
 
         $pdf->SetFont('Arial', '', 9);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->Cell(0, 5, utf8_decode($valDer), 0, 1, 'L');
+        $pdf->Cell(0, 5, texto_pdf($valDer), 0, 1, 'L');
     } else {
         $pdf->Ln(5);
     }
@@ -147,11 +153,11 @@ function campoSimple($pdf, $etq, $val)
 {
     $pdf->SetFont('Arial', 'B', 9);
     $pdf->SetTextColor(60, 60, 60);
-    $pdf->Cell(35, 5, utf8_decode($etq), 0, 0, 'L');
+    $pdf->Cell(35, 5, texto_pdf($etq), 0, 0, 'L');
 
     $pdf->SetFont('Arial', '', 9);
     $pdf->SetTextColor(0, 0, 0);
-    $pdf->MultiCell(0, 5, utf8_decode($val), 0, 'L');
+    $pdf->MultiCell(0, 5, texto_pdf($val), 0, 'L');
     $pdf->Ln(1);
 }
 
@@ -199,7 +205,7 @@ tituloSeccion($pdf, 'DESCRIPCIÓN DE LA DENUNCIA');
 $descripcion = val($denuncia, 'mensaje', '(Sin descripción registrada)');
 $pdf->SetFont('Arial', '', 9);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->MultiCell(0, 5, utf8_decode($descripcion), 0, 'J'); // Justificado
+$pdf->MultiCell(0, 5, texto_pdf($descripcion), 0, 'J'); // Justificado
 $pdf->Ln(3);
 
 // Otra línea suave
@@ -228,7 +234,7 @@ $pdf->SetTextColor(120, 120, 120);
 $pdf->MultiCell(
     0,
     4,
-    utf8_decode(
+    texto_pdf(
         "Este comprobante corresponde a una denuncia ingresada a través del formulario web de denuncias ambientales de la Municipalidad de Talcahuano."
     ),
     0,
